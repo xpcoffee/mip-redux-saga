@@ -8,12 +8,13 @@ export const Counter = () => {
 
     return (
         <div>
+            <h2>Counter</h2>
             <span>
                 <button onClick={() => dispatch(increment())}>Increment</button>
                 <button onClick={() => dispatch(incrementAsync())}>Increment Async</button>
                 <button onClick={() => dispatch(decrement())}>Decrement</button>
             </span>
-            <h1>{count}</h1>
+            <div>{count}</div>
         </div>
     );
 };

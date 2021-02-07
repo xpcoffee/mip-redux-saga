@@ -17,6 +17,7 @@ export function IPAddress() {
 
     return (
         <div>
+            <h2>IP Address</h2>
             <button onClick={() => dispatch(fetchIp())}>Fetch my IP</button>
             <button onClick={() => dispatch(reset())}>Reset</button>
             <div>
