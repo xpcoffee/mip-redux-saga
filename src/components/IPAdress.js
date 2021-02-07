@@ -1,6 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { fetchIp, reset } from "../store/ipSlice";
 
+/**
+ * Displays our guest's current IP address.
+ */
 export function IPAddress() {
     const dispatch = useDispatch();
     const { ip, error, loading } = useSelector((state) => state.ip);
