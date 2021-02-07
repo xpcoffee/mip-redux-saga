@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { put, takeEvery } from "redux-saga/effects";
 import { action } from "./reduxAction";
-import { delay } from "./async";
+import { delay } from "../async";
 
 const counterSlice = createSlice({
     name: "counter",
