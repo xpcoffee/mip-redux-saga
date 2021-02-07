@@ -32,7 +32,7 @@ export default reducer;
 
 /**** Sagas - for side-effectful/asynchronous actions ****/
 
-function* doFetchIp() {
+export function* doFetchIp() {
     yield put(createAction(load.type));
     try {
         const apiData = yield call(fetchJson, "/ip");
