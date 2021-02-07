@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 import counterReducer, { runSagas as counterSagas } from "./counterSlice";
-import ipReducer from "./ipSlice";
+import ipReducer, { runSagas as ipSagas } from "./ipSlice";
 
 const rootReducer = combineReducers({
     counter: counterReducer,
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
 
 const sagas = createSagaMiddleware();
 function* rootSaga() {
-    yield all([...counterSagas()]);
+    yield all([...counterSagas(), ...ipSagas()]);
 }
 
 export default configureStore({

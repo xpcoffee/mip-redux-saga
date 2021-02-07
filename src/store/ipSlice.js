@@ -29,3 +29,20 @@ const ipSlice = createSlice({
 const { reducer, actions } = ipSlice;
 export const { load, update, error, reset } = actions;
 export default reducer;
+
+/**** Sagas - for side-effectful/asynchronous actions ****/
+
+function* doFetchIp() {
+    yield put(createAction(load.type));
+    yield delay(500);
+    const mockData = { ip: "hello" };
+    yield put(createAction(update.type, mockData));
+}
+
+function* watchFetchIp() {
+    yield takeEvery(fetchIp().type, doFetchIp);
+}
+export const fetchIp = () => createAction("FETCH_IP");
+
+// Utility function used to create the root saga that encapsulates all the individual sagas defined here.
+export const runSagas = () => [watchFetchIp].map((saga) => saga());

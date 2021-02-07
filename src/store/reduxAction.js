@@ -1,3 +1,3 @@
 // Functions relating to Redux actions
 
-export const action = (name) => ({ type: name });
+export const action = (name, payload) => ({ type: name, payload });
