@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
+import { fetchJson } from "./api";
 import { action as createAction } from "./reduxAction";
 
 const INITIAL_IP_STATE = { ip: "-", loading: false, error: undefined };
@@ -34,7 +35,7 @@ export default reducer;
 function* doFetchIp() {
     yield put(createAction(load.type));
     try {
-        const apiData = yield fetch("/ip").then((res) => res.json());
+        const apiData = yield call(fetchJson, "/ip");
         yield put(createAction(update.type, { ip: apiData.ip }));
     } catch (e) {
         yield put(createAction(error.type, { error: e.toString() }));
