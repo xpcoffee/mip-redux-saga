@@ -33,8 +33,12 @@ export default reducer;
 
 function* doFetchIp() {
     yield put(createAction(load.type));
-    const apiData = yield fetch("/ip").then((res) => res.json());
-    yield put(createAction(update.type, { ip: apiData.ip }));
+    try {
+        const apiData = yield fetch("/ip").then((res) => res.json());
+        yield put(createAction(update.type, { ip: apiData.ip }));
+    } catch (e) {
+        yield put(createAction(error.type, { error: e.toString() }));
+    }
 }
 
 function* watchFetchIp() {
