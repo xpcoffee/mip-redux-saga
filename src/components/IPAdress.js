@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { fetchIp, reset } from "../store/ipSlice";
+import { load, reset } from "../store/ipSlice";
 
 /**
  * Displays our guest's current IP address.
@@ -21,7 +21,7 @@ export function IPAddress() {
     return (
         <div>
             <h2>IP Address</h2>
-            <button onClick={() => dispatch(fetchIp())}>Fetch my IP</button>
+            <button onClick={() => dispatch(load())}>Fetch my IP</button>
             <button onClick={() => dispatch(reset())}>Reset</button>
             <div>
                 <label>

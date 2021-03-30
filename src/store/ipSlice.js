@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { fetchJson } from "./api";
-import { action as createAction } from "./reduxAction";
 
 const INITIAL_IP_STATE = { ip: "-", loading: false, error: undefined };
 const ipSlice = createSlice({
@@ -27,25 +26,24 @@ const ipSlice = createSlice({
     },
 });
 const { reducer, actions } = ipSlice;
-export const { load, update, error, reset } = actions;
+const { load, update, error, reset } = actions;
 export default reducer;
+export { load, error, reset };
 
 /**** Sagas - for side-effectful/asynchronous actions ****/
 
 export function* doFetchIp() {
-    yield put(createAction(load.type));
     try {
         const apiData = yield call(fetchJson, "/ip");
-        yield put(createAction(update.type, { ip: apiData.ip }));
+        yield put(update({ ip: apiData.ip }));
     } catch (e) {
-        yield put(createAction(error.type, { error: e.toString() }));
+        yield put(error({ error: e.toString() }));
     }
 }
 
 function* watchFetchIp() {
-    yield takeEvery(fetchIp().type, doFetchIp);
+    yield takeEvery(load().type, doFetchIp);
 }
-export const fetchIp = () => createAction("FETCH_IP");
 
 // Utility function used to create the root saga that encapsulates all the individual sagas defined here.
 export const runSagas = () => [watchFetchIp].map((saga) => saga());
