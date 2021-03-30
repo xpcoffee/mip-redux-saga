@@ -28,7 +28,7 @@ const ipSlice = createSlice({
 const { reducer, actions } = ipSlice;
 const { load, update, error, reset } = actions;
 export default reducer;
-export { load, error, reset };
+export { load, error, reset, update };
 
 /**** Sagas - for side-effectful/asynchronous actions ****/
 
